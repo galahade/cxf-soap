@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://domgen.com/plan/services/1_0" xmlns:ops="http://domgen.com/plan/schema/1_0" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://domgen.com/plan/services/1_0" elementFormDefault="qualified" version="2.1">
+	<xs:import namespace="http://domgen.com/plan/schema/1_0" schemaLocation="PlanServiceTypes.xsd"/>
+	<xs:element name="ValidatePlanDetailsFault" type="tns:FaultType"/>
+	<xs:element name="GetPlanRateFault" type="tns:FaultType"/>
+	<xs:element name="CreatePlanFault" type="tns:FaultType"/>
+	<!-- Version 2.1 - New operation GetRatesByCallSource -->
+	<xs:element name="GetRatesByCallSourceFault" type="tns:FaultType"/>
+	<xs:complexType name="FaultType">
+		<xs:sequence>
+			<xs:element name="Detail" type="xs:string" nillable="true"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ValidatePlanDetailsReq" type="ops:ValidatePlanDetailsRequest"/>
+	<xs:element name="ValidatePlanDetailsResp" type="ops:ValidatePlanDetailsResponse"/>
+	<xs:element name="GetPlanRateReq" type="ops:GetPlanRateRequest"/>
+	<xs:element name="GetPlanRateResp" type="ops:GetPlanRateResponse"/>
+	<xs:element name="CreatePlanReq" type="ops:CreatePlanRequest"/>
+	<xs:element name="CreatePlanResp" type="ops:CreatePlanResponse"/>
+	<!-- Version 2.1 - New operation GetRatesByCallSource -->
+	<xs:element name="GetRatesByCallSourceReq" type="ops:GetRatesByCallSourceRequest"/>
+	<xs:element name="GetRatesByCallSourceResp" type="ops:GetRatesByCallSourceResponse"/>
+</xs:schema>

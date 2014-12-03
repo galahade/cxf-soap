@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSpy v2013 (x64) (http://www.altova.com) by Christine Lay (Domestic & General Group plc) -->
+<xs:schema xmlns:tns="http://domgen.com/plan/schema/1_0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://domgen.com/core/schema/1_0" targetNamespace="http://domgen.com/plan/schema/1_0" elementFormDefault="qualified" version="2.1">
+	<xs:import namespace="http://domgen.com/core/schema/1_0" schemaLocation="DGServiceTypes.xsd"/>
+	<xs:complexType name="RegistrationDetailsType">
+		<xs:sequence>
+			<xs:element ref="ns1:CompanyCode"/>
+			<xs:element ref="ns1:SchemeCode"/>
+			<xs:element ref="ns1:ReferenceNumber"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PlanToCancelDetailsType">
+		<xs:sequence>
+			<xs:element ref="ns1:CompanyCode"/>
+			<xs:element ref="ns1:SchemeCode"/>
+			<xs:element ref="ns1:ReferenceNumber"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ContactDetailsType">
+		<xs:sequence>
+			<xs:element ref="ns1:ContactTypeEnum"/>
+			<xs:element ref="ns1:Surname"/>
+			<xs:element ref="ns1:FirstName"/>
+			<xs:element ref="ns1:Title"/>
+			<xs:element ref="ns1:Initials"/>
+			<xs:element ref="ns1:AddressLine1"/>
+			<xs:element ref="ns1:AddressLine2"/>
+			<xs:element ref="ns1:AddressLine3"/>
+			<xs:element ref="ns1:AddressLine4"/>
+			<xs:element ref="ns1:PostCode"/>
+			<xs:element ref="ns1:HomeTelephone"/>
+			<xs:element ref="ns1:WorkTelephone"/>
+			<xs:element ref="ns1:MobileTelephone"/>
+			<xs:element ref="ns1:EmailAddress" minOccurs="0"/>
+			<xs:element ref="ns1:NationalIdentifier"/>
+			<xs:element ref="ns1:DateOfBirth" minOccurs="0"/>
+			<xs:element ref="ns1:Gender"/>
+			<xs:element ref="ns1:AllowCustomer"/>
+			<xs:element ref="ns1:LanguageCode"/>
+			<xs:element ref="ns1:ContactName"/>
+			<xs:element ref="ns1:NoMarketingLiterature"/>
+			<xs:element ref="tns:DisabilityList" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DirectDebitType">
+		<xs:sequence>
+			<xs:element ref="ns1:AccountName"/>
+			<xs:element ref="ns1:BankCode"/>
+			<xs:element ref="ns1:BankSortCode"/>
+			<xs:element ref="ns1:AccountNumber"/>
+			<xs:element ref="ns1:NominatedPaymentDay"/>
+			<xs:element ref="ns1:IBAN"/>
+			<xs:element ref="ns1:AccountCheckDigit"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CreditCardType">
+		<xs:sequence>
+			<xs:element ref="ns1:NameOnCard"/>
+			<xs:element ref="ns1:CreditCardType"/>
+			<xs:element ref="ns1:CreditCardExpiryDate"/>
+			<xs:element ref="ns1:SwitchIssueNumber"/>
+			<xs:element ref="ns1:CreditCardNumber"/>
+			<xs:element ref="ns1:CreditCardSecurityCode"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ValidatePlanDetailsRequest">
+		<xs:sequence>
+			<xs:element name="ClientDetails" type="ns1:ClientDetailsType"/>
+			<xs:element ref="ns1:CompanyCode"/>
+			<xs:element ref="ns1:SchemeCode"/>
+			<xs:element ref="ns1:ReferenceNumber"/>
+			<xs:element ref="ns1:Surname"/>
+			<xs:element ref="ns1:PostCode"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ValidatePlanDetailsResponse">
+		<xs:sequence>
+			<xs:element ref="ns1:BreakdownStartDate" minOccurs="0"/>
+			<xs:element ref="ns1:RenewalDate" minOccurs="0"/>
+			<xs:element ref="ns1:MakerCode"/>
+			<xs:element ref="ns1:MakerDescription"/>
+			<xs:element ref="ns1:ApplianceCode"/>
+			<xs:element ref="ns1:ApplianceDescription"/>
+			<xs:element ref="ns1:ModelNumber1"/>
+			<xs:element ref="ns1:Status"/>
+			<xs:element ref="ns1:StatusDescription"/>
+			<xs:element ref="ns1:CustomerToken"/>
+			<xs:element ref="ns1:HouseholdToken"/>
+			<xs:element ref="tns:ErrorResponseList" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetPlanRateRequest">
+		<xs:sequence>
+			<xs:element name="ClientDetails" type="ns1:ClientDetailsType"/>
+			<xs:element ref="ns1:CompanyCode"/>
+			<xs:element ref="ns1:SchemeCode"/>
+			<xs:element name="ApplianceDetails" type="tns:ApplianceDetailsType"/>
+			<xs:element ref="ns1:CustomerToken"/>
+			<xs:element ref="ns1:HouseholdToken"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetPlanRateResponse">
+		<xs:sequence>
+			<xs:element ref="ns1:DDFee"/>
+			<xs:element ref="ns1:LumpSum"/>
+			<xs:element ref="tns:ErrorResponseList" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CreatePlanRequest">
+		<xs:sequence>
+			<xs:element name="ClientDetails" type="ns1:ClientDetailsType"/>
+			<xs:element ref="ns1:HouseholdToken"/>
+			<xs:element ref="ns1:CompanyCode"/>
+			<xs:element ref="ns1:SchemeCode"/>
+			<xs:element ref="ns1:Fee"/>
+			<xs:element ref="ns1:FSAMessageType"/>
+			<xs:element ref="ns1:AdditionalMessageText"/>
+			<xs:element ref="ns1:ClientReferenceNumber"/>
+			<xs:element ref="ns1:AgentNumber"/>
+			<xs:element ref="ns1:BranchNumber"/>
+			<xs:element ref="ns1:PaymentType"/>
+			<xs:element ref="ns1:PaymentProfile"/>
+			<xs:element name="DirectDebit" type="tns:DirectDebitType" minOccurs="0"/>
+			<xs:element name="CreditCard" type="tns:CreditCardType" minOccurs="0"/>
+			<xs:element ref="ns1:GlobalGatewayReference"/>
+			<xs:element ref="ns1:CashReference"/>
+			<xs:element ref="ns1:SendMethod"/>
+			<xs:element name="PlanToCancel" type="tns:PlanToCancelDetailsType"/>
+			<xs:element ref="ns1:MultiplanApplianceCode"/>
+			<xs:element ref="ns1:MultiplanSize"/>
+			<xs:element ref="tns:ApplianceGroupWithContactType"/>
+			<xs:choice>
+				<xs:element ref="ns1:CustomerToken"/>
+				<xs:element name="AddressContact" type="tns:ContactDetailsType"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CreatePlanResponse">
+		<xs:sequence>
+			<xs:element ref="tns:PlanList" minOccurs="0"/>
+			<xs:element ref="tns:ErrorResponseList" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Version 2.1 - New operation GetRatesByCallSource -->
+	<xs:complexType name="GetRatesByCallSourceRequest">
+		<xs:sequence>
+			<xs:element name="ClientDetails" type="ns1:ClientDetailsType"/>
+			<xs:element ref="ns1:LanguageCode"/>
+			<xs:element ref="tns:CallSourceList"/>
+			<xs:element ref="ns1:IsBundle"/>
+			<xs:element ref="ns1:NumberOfAppliances"/>
+			<xs:element name="ApplianceDetails" type="ns1:ApplianceRateDetailsType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetRatesByCallSourceResponse">
+		<xs:sequence>
+			<xs:element ref="tns:RateList" minOccurs="0"/>
+			<xs:element ref="tns:ErrorResponseList" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ApplianceList">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Appliance" type="tns:ApplianceDetailsType" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ContactList">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Contact" type="tns:ContactDetailsType" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DisabilityList">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Disability" type="tns:DisabilityDetailsType" maxOccurs="3"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ApplianceGroupWithContactType">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="RiskContact" type="tns:ContactDetailsType" minOccurs="0"/>
+				<xs:element name="Appliance" type="tns:ApplianceGroupDetailsType" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ApplianceGroupList">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Appliance" type="tns:ApplianceGroupDetailsType" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PlanList">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Plan" type="tns:PlanDetailsType" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ErrorResponseList">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Error" type="ns1:ErrorResponseType" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="ApplianceDetailsType">
+		<xs:sequence>
+			<xs:element ref="ns1:ApplianceCode"/>
+			<xs:element ref="ns1:MakerCode"/>
+			<xs:element ref="ns1:PeriodOfCover"/>
+			<xs:element ref="ns1:PurchasePrice"/>
+			<xs:element ref="ns1:ManuGuarPeriod"/>
+			<xs:element ref="ns1:BreakdownStartDate" minOccurs="0"/>
+			<xs:element ref="ns1:BusinessTypeEnum" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DisabilityDetailsType">
+		<xs:sequence>
+			<xs:element ref="ns1:Disability"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ApplianceGroupDetailsType">
+		<xs:sequence>
+			<xs:element ref="ns1:MakerCode"/>
+			<xs:element ref="ns1:ApplianceCode"/>
+			<xs:element ref="ns1:SerialNumber1"/>
+			<xs:element ref="ns1:ModelNumber1"/>
+			<xs:element ref="ns1:SerialNumber2"/>
+			<xs:element ref="ns1:ModelNumber2"/>
+			<xs:element ref="ns1:PurchaseDate"/>
+			<xs:element ref="ns1:PurchasePrice"/>
+			<xs:element ref="ns1:IMEI"/>
+			<xs:element ref="ns1:PeriodOfCover"/>
+			<xs:element ref="ns1:ManuGuarPeriod"/>
+			<xs:element ref="ns1:YearOfManufacture"/>
+			<xs:element ref="ns1:BreakdownStartDate" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PlanDetailsType">
+		<xs:sequence>
+			<xs:element ref="ns1:CompanyCode"/>
+			<xs:element ref="ns1:SchemeCode"/>
+			<xs:element ref="ns1:ReferenceNumber"/>
+			<xs:element ref="ns1:BreakdownStartDate"/>
+			<xs:element ref="ns1:RenewalDate"/>
+			<xs:element ref="ns1:PlanTypeEnum"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Version 2.1 - New operation GetRatesByCallSource -->
+	<xs:element name="CallSourceList">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ns1:CallSource" minOccurs="1" maxOccurs="50"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RateList">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Rate" type="tns:RateDetailsType" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="RateDetailsType">
+		<xs:sequence>
+			<xs:element name="CallSourceDetails" type="tns:CallSourceDetailsType"/>
+			<xs:element name="OfferDetails" type="tns:OfferDetailsType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CallSourceDetailsType">
+		<xs:sequence>
+			<xs:element ref="ns1:CallSource"/>
+			<xs:element name="Scheme" type="ns1:SchemeType"/>
+			<xs:element name="Agent" type="ns1:AgentType"/>
+			<xs:element ref="ns1:ApplianceCode"/>
+			<xs:element ref="ns1:PriceBand"/>
+			<xs:element ref="ns1:NumberOfAppliances"/>
+			<xs:element ref="ns1:CoverType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OfferDetailsType">
+		<xs:sequence>
+			<xs:element ref="ns1:PeriodOfCover"/>
+			<xs:element ref="ns1:Premium"/>
+			<xs:element ref="ns1:WaitDays"/>
+			<xs:element ref="ns1:WicType"/>
+			<xs:element ref="ns1:MultiplanType"/>
+			<xs:element ref="ns1:MultiplanWarrantyType"/>
+			<xs:element name="PaymentDetails" type="tns:PaymentDetailsType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PaymentDetailsType">
+		<xs:sequence>
+			<xs:element ref="ns1:PreferredPaymentFlag"/>
+			<xs:element ref="ns1:PaymentType"/>
+			<xs:element ref="ns1:PaymentProfile"/>
+			<xs:element ref="ns1:CashPaymentType"/>
+			<xs:element ref="ns1:NumberOfPayments"/>
+			<xs:element ref="ns1:PaymentFrequency"/>
+			<xs:element ref="ns1:FirstPayment"/>
+			<xs:element ref="ns1:SubsequentPayment"/>
+			<xs:element ref="ns1:ExcessAmount"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

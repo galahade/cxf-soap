@@ -1,0 +1,1749 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSpy v2013 (x64) (http://www.altova.com) by Christine Lay (Domestic & General Group plc) -->
+<xs:schema xmlns:tns="http://domgen.com/core/schema/1_0" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://domgen.com/core/schema/1_0" elementFormDefault="qualified" version="1.4">
+	<xs:complexType name="ClientDetailsType">
+		<xs:annotation>
+			<xs:documentation>Unique details identifying who is making the request</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="tns:ClientIdentifier"/>
+			<xs:element ref="tns:Country"/>
+			<xs:element ref="tns:Channel"/>
+			<xs:element ref="tns:Username"/>
+			<xs:element ref="tns:Password"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ErrorResponseType">
+		<xs:annotation>
+			<xs:documentation>Error Code and description to be return to the client</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="tns:ErrorCode"/>
+			<xs:element ref="tns:ErrorDescription"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CustomerType">
+		<xs:sequence>
+			<xs:element ref="tns:Title"/>
+			<xs:element ref="tns:Surname"/>
+			<xs:element ref="tns:FirstName"/>
+			<xs:element ref="tns:Initials" minOccurs="0"/>
+			<xs:element ref="tns:DateOfBirth" minOccurs="0"/>
+			<xs:element name="OwnerAddress" type="tns:AddressType" nillable="true"/>
+			<xs:element name="RiskAddress" type="tns:AddressType" minOccurs="0"/>
+			<xs:element ref="tns:EmailAddress" minOccurs="0"/>
+			<xs:element ref="tns:HomeTelephone" minOccurs="0"/>
+			<xs:element ref="tns:WorkTelephone" minOccurs="0"/>
+			<xs:element ref="tns:MobileTelephone" minOccurs="0"/>
+			<xs:element ref="tns:CustomerToken"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AddressType">
+		<xs:sequence>
+			<xs:element ref="tns:AddressLine1" minOccurs="1"/>
+			<xs:element ref="tns:AddressLine2"/>
+			<xs:element ref="tns:AddressLine3"/>
+			<xs:element ref="tns:AddressLine4"/>
+			<xs:element ref="tns:PostCode" minOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SchemeType">
+		<xs:sequence>
+			<xs:element ref="tns:CompanyCode"/>
+			<xs:element ref="tns:SchemeCode"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ReferenceType">
+		<xs:complexContent>
+			<xs:extension base="tns:SchemeType">
+				<xs:sequence>
+					<xs:element ref="tns:ReferenceNumber"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PaymentProfileType">
+		<xs:sequence>
+			<xs:element ref="tns:PaymentType"/>
+			<xs:element ref="tns:PaymentProfile"/>
+			<xs:element ref="tns:NumberOfPayments"/>
+			<xs:element ref="tns:MonthsBetweenPayments"/>
+			<xs:element ref="tns:PaymentProfileDescription"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CollectionType">
+		<xs:sequence>
+			<xs:element ref="tns:CollectionNo"/>
+			<xs:element ref="tns:CollectionDate"/>
+			<xs:element ref="tns:CollectionAmount"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="IBANType">
+		<xs:annotation>
+			<xs:documentation>IBAN payment details</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="tns:IBAN"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BBANType">
+		<xs:annotation>
+			<xs:documentation>BBAN payment details</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="tns:Bank"/>
+			<xs:element ref="tns:Branch"/>
+			<xs:element ref="tns:AccountNumber"/>
+			<xs:element ref="tns:CheckDigit"/>
+			<xs:element ref="tns:BIC"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Country">
+		<xs:annotation>
+			<xs:documentation>Two character country code eg GB</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="2"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Channel">
+		<xs:annotation>
+			<xs:documentation>Channel where the request came from eg OL - OLR or GN - Genio</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="2"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="ClientIdentifier">
+		<xs:annotation>
+			<xs:documentation>Client Code</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="4"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Username">
+		<xs:annotation>
+			<xs:documentation>Assigned Username</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="10"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="SystemName">
+		<xs:annotation>
+			<xs:documentation>Name of the system calling the web service</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="6"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Password">
+		<xs:annotation>
+			<xs:documentation>Assigned Password</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="10"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="CompanyCode">
+		<xs:annotation>
+			<xs:documentation>Domgen company code</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="SchemeCode">
+		<xs:annotation>
+			<xs:documentation>Domgen scheme code</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="3"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="SchemeDescription">
+		<xs:annotation>
+			<xs:documentation>Description of the scheme</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="40"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="ReferenceNumber">
+		<xs:annotation>
+			<xs:documentation>Reference number for a plan or mailer</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="7"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="PostCode">
+		<xs:annotation>
+			<xs:documentation>Customer postcode</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="8"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Client">
+		<xs:annotation>
+			<xs:documentation>Client Description</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="40"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="PurchaseDate" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Date the appliance was purchased in yyyy-mm-dd format</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:date"/>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="BreakdownStartDate" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Date when the manufacturer's guarantee period expires in yyyy-mm-dd format</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:date"/>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="RenewalDate" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Date when the extended warranty expires in yyyy-mm-dd format</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:date"/>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="ApplianceCode">
+		<xs:annotation>
+			<xs:documentation>Domgen appliance code</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="2"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="MultiplanApplianceCode">
+		<xs:annotation>
+			<xs:documentation>Domgen appliance code</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="2"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="ApplianceDescription">
+		<xs:annotation>
+			<xs:documentation>Description of the appliance</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="40"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Status">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="ResponseCode">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="5"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="ResponseDescription">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="120"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="StatusDescription">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="40"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="MakerCode">
+		<xs:annotation>
+			<xs:documentation>Domgen maker code</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="4"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="MakerDescription">
+		<xs:annotation>
+			<xs:documentation>Description of the make</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="40"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="PeriodOfCover">
+		<xs:annotation>
+			<xs:documentation>Extended cover period in months</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="3"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="PriceBand">
+		<xs:annotation>
+			<xs:documentation>Maximum value of the price band</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="9"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="ManuGuarPeriod">
+		<xs:annotation>
+			<xs:documentation>Manufacturer's guarantee period in months</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="3"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="PurchasePrice">
+		<xs:annotation>
+			<xs:documentation>Appliance Purchase Prince</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:decimal">
+				<xs:minInclusive value="0"/>
+				<xs:maxInclusive value="99999"/>
+				<xs:fractionDigits value="2"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="InstalmentPremium" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Amount to be paid for each instalment</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:decimal">
+				<xs:minInclusive value="0"/>
+				<xs:maxInclusive value="99999"/>
+				<xs:fractionDigits value="2"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Premium" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Total premium</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:decimal">
+				<xs:minInclusive value="0"/>
+				<xs:maxInclusive value="99999"/>
+				<xs:fractionDigits value="2"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="SerialNumber1">
+		<xs:annotation>
+			<xs:documentation>Serial no 1</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="12"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="SerialNumber2">
+		<xs:annotation>
+			<xs:documentation>Serial no 2</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="12"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="ModelNumber1">
+		<xs:annotation>
+			<xs:documentation>Model no 1</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="10"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="ModelNumber2">
+		<xs:annotation>
+			<xs:documentation>Model no 2</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="10"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="IMEI">
+		<xs:annotation>
+			<xs:documentation>International Mobile Equipment identity</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="50"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="HouseholdToken">
+		<xs:annotation>
+			<xs:documentation>Unique token used to identify a household</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="10"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="CustomerToken">
+		<xs:annotation>
+			<xs:documentation>Unique token used to identify a customer</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="20"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="EligibilityFlag">
+		<xs:annotation>
+			<xs:documentation>Flag to denote the Eligibility rule</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="EligibilityDescription">
+		<xs:annotation>
+			<xs:documentation>Description of the Eligibility rule</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="40"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="MultiplanSize" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Number of appliances in a multiplan</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:int">
+				<xs:minInclusive value="0"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Surname">
+		<xs:annotation>
+			<xs:documentation>Customer Surname</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="20"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="FirstName">
+		<xs:annotation>
+			<xs:documentation>Customer First name</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="15"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Title">
+		<xs:annotation>
+			<xs:documentation>Customer Title</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="4"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Initials">
+		<xs:annotation>
+			<xs:documentation>Customer Initials</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="3"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="AddressLine1">
+		<xs:annotation>
+			<xs:documentation>Customer address line 1</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="30"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="AddressLine2" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Customer address line 2</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="30"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="AddressLine3" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Customer address line 3</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="30"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="AddressLine4" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Customer address line 4</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="20"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Telephone">
+		<xs:annotation>
+			<xs:documentation>Telehone Number</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="12"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="HomeTelephone">
+		<xs:annotation>
+			<xs:documentation>Home Telehone Number</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="12"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="WorkTelephone">
+		<xs:annotation>
+			<xs:documentation>Work Telephone Number</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="12"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="WaitPeriod">
+		<xs:annotation>
+			<xs:documentation>In months</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="2"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="MobileTelephone">
+		<xs:annotation>
+			<xs:documentation>Mobile Telephone Number</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="12"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="EmailAddress" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Customer Email address</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="DateOfBirth" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Customer date of birth in yyyy-mm-dd format</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:date"/>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="NationalIdentifier">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="16"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="NoMarketingLiterature">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="AccountName">
+		<xs:annotation>
+			<xs:documentation>DD - Bank Account name</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="25"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="AccountCheckDigit">
+		<xs:annotation>
+			<xs:documentation>DD - Bank Account Check digit</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="2"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="BankCode">
+		<xs:annotation>
+			<xs:documentation>DD - ???</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="10"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="BankSortCode">
+		<xs:annotation>
+			<xs:documentation>DD - Sort Code</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="10"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="NominatedPaymentDay" nillable="true">
+		<xs:annotation>
+			<xs:documentation>DD - Nominated payment day</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:int">
+				<xs:minInclusive value="0"/>
+				<xs:maxInclusive value="28"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="IBAN">
+		<xs:annotation>
+			<xs:documentation>IBAN - International Bank Account Number</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="35"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="NameOnCard">
+		<xs:annotation>
+			<xs:documentation>CC - Name on card</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="25"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="CreditCardType">
+		<xs:annotation>
+			<xs:documentation>CC - Card type</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="2"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="CreditCardExpiryDate">
+		<xs:annotation>
+			<xs:documentation>CC - Card expiry date mmyy format</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="4"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="SwitchIssueNumber">
+		<xs:annotation>
+			<xs:documentation>CC - Issue number</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="2"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="CreditCardNumber">
+		<xs:annotation>
+			<xs:documentation>CC - Credit card number</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="50"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="CreditCardSecurityCode" nillable="true">
+		<xs:annotation>
+			<xs:documentation>CC - Card Security code</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:int"/>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="GlobalGatewayReference">
+		<xs:annotation>
+			<xs:documentation>?????</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="20"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="CashReference">
+		<xs:annotation>
+			<xs:documentation>?????</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="20"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="FSAMessageType">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="AdditionalMessageText">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="500"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Message">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="50"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!-- Version 1.2 - Client Reference Number increased from 12 to 15 long for TGG -->
+	<xs:element name="ClientReferenceNumber">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="15"/>
+				<!--xs:maxLength value="12"/-->
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="AgentNumber">
+		<xs:annotation>
+			<xs:documentation>Domgen Agent number</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="5"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="BranchNumber">
+		<xs:annotation>
+			<xs:documentation>Domgen Branch number</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="2"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="LanguageCode">
+		<xs:annotation>
+			<xs:documentation>Two character language code eg en</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="3"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="SendMethod">
+		<xs:annotation>
+			<xs:documentation>??? Enum??</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="ErrorCode">
+		<xs:annotation>
+			<xs:documentation>Error Code returned from stored procedure</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="7"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="ErrorDescription">
+		<xs:annotation>
+			<xs:documentation>Error Description returned from stored procedure</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="120"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="PaymentType">
+		<xs:annotation>
+			<xs:documentation>Payment Type</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="PaymentProfile">
+		<xs:annotation>
+			<xs:documentation>Payment Profile</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="PaymentProfileDescription">
+		<xs:annotation>
+			<xs:documentation>Description of the Payment Type and Profile</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="40"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="NumberOfPayments" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Number of payments</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:int">
+				<xs:minInclusive value="0"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="MonthsBetweenPayments" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Months between payments</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:int">
+				<xs:minInclusive value="0"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Bollettino">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="20"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="ExternalRefNo">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="15"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="MaxReturn" nillable="true">
+		<xs:simpleType>
+			<xs:restriction base="xs:int">
+				<xs:maxInclusive value="9"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="SequenceNumber">
+		<xs:simpleType>
+			<xs:restriction base="xs:int">
+				<xs:maxInclusive value="999"/>
+				<xs:minInclusive value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="CardNumber">
+		<xs:annotation>
+			<xs:documentation>NB - is this the same as credit card number?</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="50"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="ExpiryDate">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="6"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Type">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="2"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Bank">
+		<xs:annotation>
+			<xs:documentation>BBAN - Bank</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="10"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Branch">
+		<xs:annotation>
+			<xs:documentation>BBAN - Branch</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="10"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="CheckDigit">
+		<xs:annotation>
+			<xs:documentation>BBAN - Check Digit</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="2"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="AccountNumber">
+		<xs:annotation>
+			<xs:documentation>BBAN - Account Number</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="16"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="BIC">
+		<xs:annotation>
+			<xs:documentation>BBAN - BIC</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="11"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="SinglePaymentDay">
+		<xs:annotation>
+			<xs:documentation>NB. is the same as Nominated Payment Day?</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="2"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="CollectionNo" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Collection sequence no</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:int">
+				<xs:minInclusive value="1"/>
+				<xs:maxInclusive value="99"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="CollectionDate" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Collection date in yyyy-mm-dd format</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:date"/>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="CollectionAmount" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Collection Amount</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:decimal">
+				<xs:minInclusive value="0"/>
+				<xs:maxInclusive value="99999"/>
+				<xs:fractionDigits value="2"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="AcceptanceDate" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Date plan taken up in yyyy-mm-dd format</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:date"/>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Fee" nillable="true">
+		<xs:annotation>
+			<xs:documentation>NB- is this the same as premium???</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:decimal">
+				<xs:minInclusive value="0"/>
+				<xs:maxInclusive value="99999"/>
+				<xs:fractionDigits value="2"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="DDFee" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Direct Debit Fee</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:decimal">
+				<xs:minInclusive value="0"/>
+				<xs:maxInclusive value="99999"/>
+				<xs:fractionDigits value="2"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="CCFee" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Credit Card Fee</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:decimal">
+				<xs:minInclusive value="0"/>
+				<xs:maxInclusive value="99999"/>
+				<xs:fractionDigits value="2"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="LumpSum" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Lump Sum</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:decimal">
+				<xs:minInclusive value="0"/>
+				<xs:maxInclusive value="99999"/>
+				<xs:fractionDigits value="2"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="YearOfManufacture">
+		<xs:annotation>
+			<xs:documentation>Year of manufacture</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="4"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Gender">
+		<xs:annotation>
+			<xs:documentation>Should this be an ENUM??</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Disability">
+		<xs:annotation>
+			<xs:documentation>Disability code</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="2"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="AllowCustomer">
+		<xs:annotation>
+			<xs:documentation>Allow Customer (override address validation)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="ContactName">
+		<xs:annotation>
+			<xs:documentation>Contact Name (for Risk Owner)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="40"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="BusinessTypeEnum">
+		<xs:annotation>
+			<xs:documentation>The business type has the following values:
+					N - New Business
+					R - Renewal
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="N"/>
+				<xs:enumeration value="R"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="ReferenceTypeEnum">
+		<xs:annotation>
+			<xs:documentation>The reference type has the following values:
+					PLAN - Plan
+					REGN - Registration
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="PLAN"/>
+				<xs:enumeration value="REGN"/>
+				<xs:enumeration value=""/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="EligibilityFlagEnum">
+		<xs:annotation>
+			<xs:documentation>The eligibility flag determines whether a customer is eligible for a multiplan. Where:
+					Y - Multi and single eligible
+					M - Multi eligible
+					S - Single eligible
+					N - Not eligible
+					D - Single plan eligible with Discount
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="Y"/>
+				<xs:enumeration value="M"/>
+				<xs:enumeration value="S"/>
+				<xs:enumeration value="N"/>
+				<xs:enumeration value="D"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="SinglePaymentFlagEnum">
+		<xs:annotation>
+			<xs:documentation>The single payment flag indicates that a date should be returned to illustrate what the last possible date for payment would be to ensure only single payments are collected every month. Where:
+					Y - Yes
+					N - No
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="Y"/>
+				<xs:enumeration value="N"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="ReprintFlagEnum" nillable="true">
+		<xs:annotation>
+			<xs:documentation>The reprint flag indicates whether the payment schedule is for the current or next period. Where:
+					C - Current period
+					N - Next period
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="C"/>
+				<xs:enumeration value="N"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="MultiplanFlagEnum">
+		<xs:annotation>
+			<xs:documentation>The mulitplan flag indicates whether the scheme can take mulitplans Where:
+					Y - Yes
+					N - No
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="Y"/>
+				<xs:enumeration value="N"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="ContactTypeEnum">
+		<xs:annotation>
+			<xs:documentation>The contact type indicates which address is being used. Where:
+					R - Risk Owner
+					C - Contact
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="R"/>
+				<xs:enumeration value="C"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="OfferStatusEnum">
+		<xs:annotation>
+			<xs:documentation>The offer status indicates which type of offer is being requested. Where:
+					N - New
+					R - Renewal
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="N"/>
+				<xs:enumeration value="R"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="StatusEnum">
+		<xs:annotation>
+			<xs:documentation>The status indicates whether the plan is New Business or a Renewal. Where:
+					N - New Business
+					R - Renewal
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="N"/>
+				<xs:enumeration value="R"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="PlanTypeEnum">
+		<xs:annotation>
+			<xs:documentation>The plan type indicates whether the plan is a Header plan or a Baby plan Where:
+					H - Header Plan
+					B - Baby Plan
+					S - Single Plan
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="H"/>
+				<xs:enumeration value="B"/>
+				<xs:enumeration value="S"/>
+				<xs:enumeration value=" "/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="TelephoneTypeEnum">
+		<xs:annotation>
+			<xs:documentation>The telephone type indicates the telephone number type. Where:
+					H - Home
+					W - Work
+					M - Mobile
+					F - Fax
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="H"/>
+				<xs:enumeration value="W"/>
+				<xs:enumeration value="M"/>
+				<xs:enumeration value="F"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="OperationEnum">
+		<xs:annotation>
+			<xs:documentation>The operation indicates the CRUD operation type. Where:
+					C - Create
+					R - Read
+					U - Update
+					D - Delete
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="C"/>
+				<xs:enumeration value="R"/>
+				<xs:enumeration value="U"/>
+				<xs:enumeration value="D"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:complexType name="DPAType">
+		<xs:sequence>
+			<xs:element name="DPA1prcDGC" type="tns:DPAFlagType" minOccurs="0"/>
+			<xs:element name="DPA2mktDG" type="tns:DPAFlagType" minOccurs="0"/>
+			<xs:element name="DPA3mktC" type="tns:DPAFlagType" minOccurs="0"/>
+			<xs:element name="DPA4mktDGC" type="tns:DPAFlagType" minOccurs="0"/>
+			<xs:element name="DPA5mktThird" type="tns:DPAFlagType" minOccurs="0"/>
+			<xs:element name="DPA6mktEmail" type="tns:DPAFlagType" minOccurs="0"/>
+			<xs:element name="DPA7mktSMS" type="tns:DPAFlagType" minOccurs="0"/>
+			<xs:element name="DPA8mktPhone" type="tns:DPAFlagType" minOccurs="0"/>
+			<xs:element name="DPA9mktPost" type="tns:DPAFlagType" minOccurs="0"/>
+			<xs:element name="DPA10allTC" type="tns:DPAFlagType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DPAFlagType">
+		<xs:annotation>
+			<xs:documentation>Flag to identify DPA preference</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="tns:DPA"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="DPA">
+		<xs:annotation>
+			<xs:documentation>Flag to identify DPA preference</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!-- Version 1.1 - The following 4 elements have been added in for variable DDs -->
+	<xs:element name="AdjustedPaymentWarning" type="xs:boolean">
+		<xs:annotation>
+			<xs:documentation>Adjusted Payment Warning</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="LatePaymentWarning" type="xs:boolean">
+		<xs:annotation>
+			<xs:documentation>Late Payment Warning</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CostPerDay" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Cost per day</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:decimal">
+				<xs:minInclusive value="0"/>
+				<xs:maxInclusive value="99999"/>
+				<xs:fractionDigits value="2"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="CostPerMonth" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Cost per month</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:decimal">
+				<xs:minInclusive value="0"/>
+				<xs:maxInclusive value="99999"/>
+				<xs:fractionDigits value="2"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="ThisPayType">
+		<xs:annotation>
+			<xs:documentation>Existing payment type for Renewal</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="2"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!-- Version 1.3 - The following 4 elements have been added in for TGG (PR02182) -->
+	<xs:element name="ClientMakerCode">
+		<xs:annotation>
+			<xs:documentation>Client Maker code</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="50"/>
+				<!-- increased from 20 to 50 -->
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="ClientApplianceCode">
+		<xs:annotation>
+			<xs:documentation>Client Appliance code</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="15"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="ClientApplianceDescription">
+		<xs:annotation>
+			<xs:documentation>Client Appliance Description</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="50"/>
+				<!-- increased from 30 to 50 -->
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="UniqueProductIdentifier">
+		<xs:annotation>
+			<xs:documentation>Unique product Identifier</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="50"/>
+				<!-- increased from 20 to 50 -->
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="ClientLocation">
+		<xs:annotation>
+			<xs:documentation>Client Location</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="20"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="ApplianceFamilyCode">
+		<xs:annotation>
+			<xs:documentation>Appliance Family Code</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="2"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="ApplianceFamilyDescription">
+		<xs:annotation>
+			<xs:documentation>Appliance Family Description</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="40"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!-- Version 1.4 - The following elements have been added in for eCommerce (PR ) -->
+	<xs:element name="MessageText">
+		<xs:annotation>
+			<xs:documentation>Message Text</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string"/>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="ProtectMessage">
+		<xs:annotation>
+			<xs:documentation>Protect Message Y/N</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:boolean"/>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="MessageTypeEnum">
+		<xs:annotation>
+			<xs:documentation>The message type indicates the messagetype. Where:
+					P - Plan
+					M - Mailer
+					C - Customer
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="P"/>
+				<xs:enumeration value="M"/>
+				<xs:enumeration value="C"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="IsBundle">
+		<xs:annotation>
+			<xs:documentation>Is the Plan a Bundle?
+					Y - Yes
+					N - No
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="Y"/>
+				<xs:enumeration value="N"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="NumberOfAppliances">
+		<xs:annotation>
+			<xs:documentation>Number of Appliances</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:int"/>
+		</xs:simpleType>
+	</xs:element>
+	<xs:complexType name="AgentType">
+		<xs:sequence>
+			<xs:element ref="tns:AgentNumber"/>
+			<xs:element ref="tns:BranchNumber"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="CallSource">
+		<xs:annotation>
+			<xs:documentation>Call Source</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="4"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="GoodsColour">
+		<xs:annotation>
+			<xs:documentation>GoodsColour</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:complexType name="ApplianceDetailsType">
+		<xs:sequence>
+			<xs:element ref="tns:ApplianceCode"/>
+			<xs:element ref="tns:MakerCode"/>
+			<xs:element ref="tns:PurchaseDate" minOccurs="0"/>
+			<xs:element ref="tns:PurchasePrice"/>
+			<xs:element ref="tns:ManuGuarPeriod"/>
+			<xs:element ref="tns:GoodsColour"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ApplianceRateDetailsType">
+		<xs:complexContent>
+			<xs:extension base="tns:ApplianceDetailsType">
+				<xs:sequence>
+					<xs:element ref="tns:BreakdownStartDate" minOccurs="0"/>
+					<xs:element ref="tns:BoilerType" minOccurs="0"/>
+					<xs:element ref="tns:BusinessTypeEnum" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="BoilerType">
+		<xs:annotation>
+			<xs:documentation>Boiler Type</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="3"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="CashPaymentType">
+		<xs:annotation>
+			<xs:documentation>Cash Payment Type</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="4"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="FirstPayment" nillable="true">
+		<xs:annotation>
+			<xs:documentation>First Payment</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:decimal">
+				<xs:minInclusive value="0"/>
+				<xs:maxInclusive value="99999"/>
+				<xs:fractionDigits value="2"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="SubsequentPayment" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Subsequent Payment</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:decimal">
+				<xs:minInclusive value="0"/>
+				<xs:maxInclusive value="99999"/>
+				<xs:fractionDigits value="2"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="ExcessAmount" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Excess Amount</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:decimal">
+				<xs:minInclusive value="0"/>
+				<xs:maxInclusive value="99999"/>
+				<xs:fractionDigits value="2"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="PaymentFrequency">
+		<xs:annotation>
+			<xs:documentation>Payment Frequency</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:int">
+				<xs:maxInclusive value="99"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="CoverType">
+		<xs:annotation>
+			<xs:documentation>Cover Type</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="8"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="WaitDays">
+		<xs:annotation>
+			<xs:documentation>Number of days to wait</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:int">
+				<xs:maxInclusive value="99"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="WicType">
+		<xs:annotation>
+			<xs:documentation>WIC Type</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="MultiplanWarrantyType">
+		<xs:annotation>
+			<xs:documentation>Multiplan Warranty Type</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="MultiplanType">
+		<xs:annotation>
+			<xs:documentation>Multiplan Type</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="2"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="PreferredPaymentFlag">
+		<xs:annotation>
+			<xs:documentation>Preferred Payment? Y/N:
+					Y - Yes
+					N - No
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="Y"/>
+				<xs:enumeration value="N"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://domgen.com/plan/services/1_0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns="http://domgen.com/plan/services/1_0" name="WebServiceName" targetNamespace="http://domgen.com/plan/services/1_0">
+	<types>
+		<xs:schema elementFormDefault="qualified" targetNamespace="http://domgen.com/plan/services/1_0" xmlns:data="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://schemas.xmlsoap.org/wsdl/">
+			<xs:include schemaLocation="./PlanServiceTypesMessages.xsd"/>
+		</xs:schema>
+	</types>
+	<message name="ValidatePlanDetailsRequest">
+		<part name="parameters" element="tns:ValidatePlanDetailsReq"/>
+	</message>
+	<message name="ValidatePlanDetailsResponse">
+		<part name="parameters" element="tns:ValidatePlanDetailsResp"/>
+	</message>
+	<message name="ValidatePlanDetailsFault">
+		<part name="details" element="tns:ValidatePlanDetailsFault"/>
+	</message>
+	<message name="GetPlanRateRequest">
+		<part name="parameters" element="tns:GetPlanRateReq"/>
+	</message>
+	<message name="GetPlanRateResponse">
+		<part name="parameters" element="tns:GetPlanRateResp"/>
+	</message>
+	<message name="GetPlanRateFault">
+		<part name="details" element="tns:GetPlanRateFault"/>
+	</message>
+	<message name="CreatePlanRequest">
+		<part name="parameters" element="tns:CreatePlanReq"/>
+	</message>
+	<message name="CreatePlanResponse">
+		<part name="parameters" element="tns:CreatePlanResp"/>
+	</message>
+	<message name="CreatePlanFault">
+		<part name="details" element="tns:CreatePlanFault"/>
+	</message>
+	<message name="GetRatesByCallSourceRequest">
+		<part name="parameters" element="tns:GetRatesByCallSourceReq"/>
+	</message>
+	<message name="GetRatesByCallSourceResponse">
+		<part name="parameters" element="tns:GetRatesByCallSourceResp"/>
+	</message>
+	<message name="GetRatesByCallSourceFault">
+		<part name="details" element="tns:GetRatesByCallSourceFault"/>
+	</message>
+	<portType name="IPlanService">
+		<operation name="ValidatePlanDetails">
+			<wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"/>
+			<input message="tns:ValidatePlanDetailsRequest"/>
+			<output message="tns:ValidatePlanDetailsResponse"/>
+			<fault name="ValidatePlanDetailsFault" message="tns:ValidatePlanDetailsFault"/>
+		</operation>
+		<operation name="GetPlanRate">
+			<wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"/>
+			<input message="tns:GetPlanRateRequest"/>
+			<output message="tns:GetPlanRateResponse"/>
+			<fault name="GetPlanRateFault" message="tns:GetPlanRateFault"/>
+		</operation>
+		<operation name="CreatePlan">
+			<wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"/>
+			<input message="tns:CreatePlanRequest"/>
+			<output message="tns:CreatePlanResponse"/>
+			<fault name="CreatePlanFault" message="tns:CreatePlanFault"/>
+		</operation>
+		<!-- Version 2.1 - New operation GetRatesByCallSource -->
+		<operation name="GetRatesByCallSource">
+			<wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"/>
+			<input message="tns:GetRatesByCallSourceRequest"/>
+			<output message="tns:GetRatesByCallSourceResponse"/>
+			<fault name="GetRatesByCallSourceFault" message="tns:GetRatesByCallSourceFault"/>
+		</operation>
+	</portType>
+	<binding name="PlanServiceSoapBinding" type="tns:IPlanService">
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+		<operation name="ValidatePlanDetails">
+			<soap:operation soapAction="" style="document"/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+			<fault name="ValidatePlanDetailsFault">
+				<soap:fault name="ValidatePlanDetailsFault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="GetPlanRate">
+			<soap:operation soapAction=""/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+			<fault name="GetPlanRateFault">
+				<soap:fault name="GetPlanRateFault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="CreatePlan">
+			<soap:operation soapAction="" style="document"/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+			<fault name="CreatePlanFault">
+				<soap:fault name="CreatePlanFault" use="literal"/>
+			</fault>
+		</operation>
+		<!-- Version 2.1 - New operation GetRatesByCallSource -->
+		<operation name="GetRatesByCallSource">
+			<soap:operation soapAction="" style="document"/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+			<fault name="GetRatesByCallSourceFault">
+				<soap:fault name="GetRatesByCallSourceFault" use="literal"/>
+			</fault>
+		</operation>
+	</binding>
+	<service name="PlanService">
+		<port name="PlanServiceSoapPort" binding="tns:PlanServiceSoapBinding">
+			<soap:address location="http://localhost:7800/planServicesWeb/PlanService"/>
+		</port>
+	</service>
+	<!-- Version 2.1 - New operation GetRatesByCallSource -->
+</definitions>
